@@ -1,7 +1,16 @@
 <?php 
 
-function get_product_list($connect) {
-	$query = "SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id";
+function get_product_list_count($connect) {
+	$query = "SELECT COUNT(*) AS c FROM products p LEFT JOIN categories c ON p.category_id = c.id";
+	$result = query($connect, $query);
+
+	$row = mysqli_fetch_assoc($result);
+
+	return (int) ($row['c'] ?? 0);
+}
+
+function get_product_list($connect, int $limit = 100, int $offset = 0) {
+	$query = "SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id LIMIT $offset, $limit";
 	$result = query($connect, $query);
 
 	$products = [];
@@ -70,4 +79,16 @@ function get_product_from_post () {
 	    'category_id' => $_POST['category_id'] ?? '',
 	    'description' => $_POST['description'] ?? ''
     ];
+}
+
+function get_product_list_by_category($connect, $category_id) {
+	$query = "SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE p.category_id = $category_id";
+	$result = query($connect, $query);
+
+	$products = [];
+	while ( $row = mysqli_fetch_assoc($result) ) {
+	    $products[] = $row;
+	}
+
+	return $products;	
 }

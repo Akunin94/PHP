@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2020-07-19 11:21:17
+<?php /* Smarty version 2.6.31, created on 2020-07-20 18:26:37
          compiled from products/index.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array('h1' => 'Список товаров')));
@@ -8,6 +8,41 @@ unset($_smarty_tpl_vars);
 	<div class="mb-4 d-flex justify-content-between">
 		<a href="/products/add" class="btn btn-success">Добавить</a>
 	</div>
+	<nav>
+		<ul class="pagination">
+			<?php unset($this->_sections['pagination']);
+$this->_sections['pagination']['loop'] = is_array($_loop=$this->_tpl_vars['pages_count']) ? count($_loop) : max(0, (int)$_loop); unset($_loop);
+$this->_sections['pagination']['name'] = 'pagination';
+$this->_sections['pagination']['show'] = true;
+$this->_sections['pagination']['max'] = $this->_sections['pagination']['loop'];
+$this->_sections['pagination']['step'] = 1;
+$this->_sections['pagination']['start'] = $this->_sections['pagination']['step'] > 0 ? 0 : $this->_sections['pagination']['loop']-1;
+if ($this->_sections['pagination']['show']) {
+    $this->_sections['pagination']['total'] = $this->_sections['pagination']['loop'];
+    if ($this->_sections['pagination']['total'] == 0)
+        $this->_sections['pagination']['show'] = false;
+} else
+    $this->_sections['pagination']['total'] = 0;
+if ($this->_sections['pagination']['show']):
+
+            for ($this->_sections['pagination']['index'] = $this->_sections['pagination']['start'], $this->_sections['pagination']['iteration'] = 1;
+                 $this->_sections['pagination']['iteration'] <= $this->_sections['pagination']['total'];
+                 $this->_sections['pagination']['index'] += $this->_sections['pagination']['step'], $this->_sections['pagination']['iteration']++):
+$this->_sections['pagination']['rownum'] = $this->_sections['pagination']['iteration'];
+$this->_sections['pagination']['index_prev'] = $this->_sections['pagination']['index'] - $this->_sections['pagination']['step'];
+$this->_sections['pagination']['index_next'] = $this->_sections['pagination']['index'] + $this->_sections['pagination']['step'];
+$this->_sections['pagination']['first']      = ($this->_sections['pagination']['iteration'] == 1);
+$this->_sections['pagination']['last']       = ($this->_sections['pagination']['iteration'] == $this->_sections['pagination']['total']);
+?>
+			<li class="page-item <?php if ($_GET['p'] == $this->_sections['pagination']['iteration'] || ( ! $_GET['p'] && $this->_sections['pagination']['iteration'] == 1 )): ?>active<?php endif; ?>">
+				<a href="<?php echo $_SERVER['PATH_INFO']; ?>
+?p=<?php echo $this->_sections['pagination']['iteration']; ?>
+" class="page-link"><?php echo $this->_sections['pagination']['iteration']; ?>
+</a>
+			</li>
+			<?php endfor; endif; ?>
+		</ul>
+	</nav>
 	<table class="table table-light table-striped table-bordered table-hover">
 		<thead class="thead-dark">
 			<tr>

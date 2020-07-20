@@ -2,6 +2,15 @@
 	<div class="mb-4 d-flex justify-content-between">
 		<a href="/products/add" class="btn btn-success">Добавить</a>
 	</div>
+	<nav>
+		<ul class="pagination">
+			{section loop=$pages_count name=pagination}
+			<li class="page-item {if $smarty.get.p == $smarty.section.pagination.iteration || (!$smarty.get.p && $smarty.section.pagination.iteration==1 ) }active{/if}">
+				<a href="{$smarty.server.PATH_INFO}?p={$smarty.section.pagination.iteration}" class="page-link">{$smarty.section.pagination.iteration}</a>
+			</li>
+			{/section}
+		</ul>
+	</nav>
 	<table class="table table-light table-striped table-bordered table-hover">
 		<thead class="thead-dark">
 			<tr>

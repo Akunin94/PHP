@@ -31,6 +31,17 @@
 	    </div>
 	</nav>
 	<div class="container">
-		{if $h1}
-		<h1 class="mb-3">{$h1}</h1>
-		{/if}
+		<div class="row">
+			<div class="col-3">
+				<nav class="nav flex-column nav-pills">
+					{foreach from=$categories_shared item=e}
+					<li class="nav-item">
+						<a class="nav-link {if $e.id == $current_category.id}active{/if}" href="/categories/view?id={$e.id}">{$e.name}</a>
+					</li>
+					{/foreach}
+				</nav>
+			</div>
+			<div class="col-9">
+				{if $h1}
+				<h1 class="mb-4">{$h1}</h1>
+				{/if}

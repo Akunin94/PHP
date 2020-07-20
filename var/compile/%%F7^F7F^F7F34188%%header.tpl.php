@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2020-07-19 10:34:57
+<?php /* Smarty version 2.6.31, created on 2020-07-20 14:09:50
          compiled from header.tpl */ ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,22 @@
 	    </div>
 	</nav>
 	<div class="container">
-		<?php if ($this->_tpl_vars['h1']): ?>
-		<h1 class="mb-3"><?php echo $this->_tpl_vars['h1']; ?>
+		<div class="row">
+			<div class="col-3">
+				<nav class="nav flex-column nav-pills">
+					<?php $_from = $this->_tpl_vars['categories_shared']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['e']):
+?>
+					<li class="nav-item">
+						<a class="nav-link <?php if ($this->_tpl_vars['e']['id'] == $this->_tpl_vars['current_category']['id']): ?>active<?php endif; ?>" href="/categories/view?id=<?php echo $this->_tpl_vars['e']['id']; ?>
+"><?php echo $this->_tpl_vars['e']['name']; ?>
+</a>
+					</li>
+					<?php endforeach; endif; unset($_from); ?>
+				</nav>
+			</div>
+			<div class="col-9">
+				<?php if ($this->_tpl_vars['h1']): ?>
+				<h1 class="mb-4"><?php echo $this->_tpl_vars['h1']; ?>
 </h1>
-		<?php endif; ?>
+				<?php endif; ?>
