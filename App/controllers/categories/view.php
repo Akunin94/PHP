@@ -2,8 +2,8 @@
 
 $category_id = (int) $_GET['id'] ?? 0;
 
-$category = get_category_by_id($connect,$category_id);
-$products = get_product_list_by_category($connect, $category_id);
+$category = Category::getById($category_id);
+$products = Product::getListByCategory($category_id);
 
 $smarty->assign('current_category', $category);
 $smarty->assign('products', $products);

@@ -7,7 +7,7 @@ if ( !$id ) {
     die('Error with id');
 }
 
-$deleted = delete_products_of_category($connect, $id);
+$deleted = Category::deleteAllProducts($connect, $id);
 
 if ($deleted) {
     header('Location: /categories/list');

@@ -6,13 +6,13 @@ $id = (int) $id;
 $category = [];
 
 if ( $id ) {
-    $category = get_category_by_id($connect,$id);
+    $category = Category::getById($id);
 }
 
 if ( !empty($_POST) ) {
-    $category = get_category_from_post();
+    $category = Category::getFromPost();
 
-    $edited = update_category_by_id($connect, $id, $category);
+    $edited = Category::updateById($id, $category);
 
     if ($edited) {
         header('Location: /categories/list');
