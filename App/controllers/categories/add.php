@@ -1,11 +1,11 @@
 <?php
 
-if ( !empty($_POST) ) {
+if ( Request::isPost() ) {
     $category = Category::getFromPost();
-    $inserted = Category::add($connect, $category);
+    $inserted = Category::add($category);
 
     if ($inserted) {
-        header('Location: /categories/list');
+        Response::redirect('/categories/list');
     } else {
         die("some insert error");
     }

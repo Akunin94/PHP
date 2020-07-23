@@ -1,7 +1,6 @@
 <?php
 
-$id = $_POST['id'] ?? '';
-$id = (int) $id;
+$id = Request::getIntFromPost('id', false);
 
 if ( !$id ) {
     die('Error with id');
@@ -10,7 +9,7 @@ if ( !$id ) {
 $deleted = Product::deleteById($id);
 
 if ($deleted) {
-    header('Location: /products/list');
+    Response::redirect('/products/list');
 } else {
     die("some error with delete");
 }

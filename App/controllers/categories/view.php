@@ -1,6 +1,6 @@
 <?php 
 
-$category_id = (int) $_GET['id'] ?? 0;
+$category_id = Request::getIntFromGet('id', false);
 
 $category = Category::getById($category_id);
 $products = Product::getListByCategory($category_id);

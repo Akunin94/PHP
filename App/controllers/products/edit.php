@@ -1,7 +1,6 @@
 <?php
 
-$id = $_GET['id'] ?? 0;
-$id = (int) $id;
+$id = Request::getIntFromGet('id');
 
 $product = [];
 
@@ -9,12 +8,13 @@ if ( $id ) {
     $product = Product::getById($id);
 }
 
-if ( !empty($_POST) ) {
+if ( Request::isPost() ) {
     $product = Product::getDataFromPost();
+
     $edited = Product::updateById($id, $product);
 
     if ($edited) {
-        header('Location: /products/list');
+        Response::redirect('/products/list');
     } else {
         die("some insert error");
     }

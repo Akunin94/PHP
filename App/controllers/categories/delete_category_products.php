@@ -1,16 +1,15 @@
 <?php
 
-$id = $_POST['id'] ?? '';
-$id = (int) $id;
+$id = Request::getIntFromPost('id', false);
 
 if ( !$id ) {
     die('Error with id');
 }
 
-$deleted = Category::deleteAllProducts($connect, $id);
+$deleted = Category::deleteAllProducts($id);
 
 if ($deleted) {
-    header('Location: /categories/list');
+    Response::redirect('/categories/list');
 } else {
     die("Нечего удалять");
 }

@@ -3,52 +3,34 @@
 class Category {
 	public static function getList() {
 		$query = "SELECT * FROM categories";
-		$result = Db::query($query);
-
-		$categories = [];
-		while ( $row = mysqli_fetch_assoc($result) ) {
-		    $categories[] = $row;
-		}
-
-		return $categories;
+		
+		return Db::fetchAll($query);
 	}
 
 	public static function getById($id) {
 	    $query = "SELECT * FROM categories WHERE id = $id";
-	    $result = Db::query($query);
-
-	    $category = mysqli_fetch_assoc($result);
-	    if ( is_null($category) ) {
-	        $category = [];
-	    }
-
-	    return $category;
+	    
+	    return Db::fetchRow($query);
 	}
 
-	public static function updateCategoryById($id, $category) { 
-		$name = $category['name'] ?? '';
+	public static function updateById(int $id, array $category) { 
+	    if ( isset($category['id']) ) {
+	    	unset($category['id']);
+	    }
 
-	    $query = "UPDATE categories SET name = '$name' WHERE id = $id";
-	    Db::query($query);
-
-	    return Db::affectedRows();
-
+	    return Db::update('categories', $category, "id = $id");
 	}
 
 	public static function add($category) { 
-		$name = $category['name'] ?? '';
+	    if ( isset($category['id']) ) {
+	    	unset($category['id']);
+	    }
 
-	    $query = "INSERT INTO categories(name) VALUES ('$name')";
-	    Db::query($query);
-
-	    return Db::affectedRows();
+	    return Db::insert('categories', $category);
 	}
 
-	public static function deleteCategoryById($id) {
-		$query = "DELETE FROM categories WHERE id = $id";
-		Db::query($query);
-
-		return Db::affectedRows();
+	public static function deleteById(int $id) {
+		return Db::delete('categories', "id = $id");
 	}
 
 	public static function deleteAllProducts($id) {
@@ -60,8 +42,8 @@ class Category {
 
 	public static function getFromPost () {
 		return [
-		    'id' => $_POST['id'] ?? '',
-		    'name' => $_POST['name'] ?? ''
+		    'id' => Request::getIntFromPost('id', false),
+		    'name' => Request::getStrFromPost('name') 
 	    ];
 	}
 }
