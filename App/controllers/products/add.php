@@ -1,11 +1,37 @@
 <?php
 
 if ( Request::isPost() ) {
+
     $product = Product::getDataFromPost();
+    $productId = Product::add($product);
 
-    $inserted = Product::add($product);
+	$uploadImages = $_FILES['images'] ?? [];
 
-    if ($inserted) {
+	$path = APP_UPLOAD_PRODUCT_DIR . '/' . $productId;
+
+	if ( !file_exists($path) ) {
+		mkdir($path);
+	}
+
+	$imageNames = $uploadImages['name'];
+	$imageTmpNames = $uploadImages['tmp_name'];
+
+	for ( $i = 0; $i < count($imageNames); $i++ ) {
+		$imageName = basename($imageNames[$i]);
+		$imageTmpName = $imageTmpNames[$i];
+
+		$imagePath = $path . '/' . $imageName;
+
+		move_uploaded_file($imageTmpName, $imagePath);
+
+		ProductImage::add([
+			'product_id' => $productId,
+			'name' => $imageName,
+			'path' => str_replace(APP_PUBLIC_DIR, '', $imagePath)
+		]);
+	}
+
+    if ($productId) {
         Response::redirect('/products/list');
     } else {
         die("some insert error");

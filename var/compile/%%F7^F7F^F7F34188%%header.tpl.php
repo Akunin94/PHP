@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.31, created on 2020-07-20 14:09:50
+<?php /* Smarty version 2.6.31, created on 2020-07-23 16:21:12
          compiled from header.tpl */ ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<title>AkuninShop</title>

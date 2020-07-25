@@ -1,7 +1,7 @@
 <div class="mb-4 d-flex justify-content-between">
     <a href="/products/list" class="btn btn-secondary">Назад к списку товаров</a>
 </div>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="{$product.id}">
 
     <div class="form-group">
@@ -11,6 +11,10 @@
     <div class="form-group">
         <label for="article">Артикул товара: </label>
         <input class="form-control" type="text" name="article" id="article" required value="{$product.article}">
+    </div>
+    <div class="form-group">
+        <label for="images">Фото товара: </label>
+        <input multiple type="file" name="images[]" id="images">
     </div>
     <div class="form-group">
         <label for="price">Цена товара: </label>

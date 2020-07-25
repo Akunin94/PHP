@@ -26,7 +26,15 @@
 			{foreach from=$products item=e}
 			<tr>
 				<td>
+					<small class="text-muted">({$e.id})</small>
 					{$e.name}
+					{if !empty($e.images)}
+					<br />
+					{foreach from=$e.images item=b}
+					<img width="30" src="{$b.path}" alt="{$b.name}">
+					{/foreach}
+					{/if}
+
 					{if $e.description}
 					<small class="text-muted mt-1 d-block">{$e.description}</small>
 					{/if}
