@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.31, created on 2020-07-23 16:41:33
+<?php /* Smarty version 2.6.31, created on 2020-07-26 15:31:05
          compiled from products/form.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'default', 'products/form.tpl', 40, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'default', 'products/form.tpl', 88, false),)), $this); ?>
 <div class="mb-4 d-flex justify-content-between">
     <a href="/products/list" class="btn btn-secondary">Назад к списку товаров</a>
 </div>
@@ -23,6 +23,60 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'default', '
         <label for="images">Фото товара: </label>
         <input multiple type="file" name="images[]" id="images">
     </div>
+    <?php if (! empty ( $this->_tpl_vars['product']['images'] )): ?>
+    <div class="form-group d-flex">
+        <?php $_from = $this->_tpl_vars['product']['images']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['e']):
+?>
+        <div class="card mr-1 p-1 align-items-center" style="width: 180px;">
+            <img class="mw-100" src="<?php echo $this->_tpl_vars['e']['path']; ?>
+" alt="<?php echo $this->_tpl_vars['e']['name']; ?>
+">
+            <div class="card-body p-0 mt-1 d-flex justify-content-center align-items-end">
+                <button class="btn btn-danger btn-lg" type="submit" onclick="return deleteImage(this)" data-image-id="<?php echo $this->_tpl_vars['e']['id']; ?>
+">Удалить</button>
+            </div>
+        </div>
+        <?php endforeach; endif; unset($_from); ?>
+    </div>
+
+    <?php echo '
+    <script>
+        function deleteImage(button) {
+            let imageId = $(button).attr(\'data-image-id\'),
+                url = \'/products/delete_images\';
+
+            imageId = parseInt(imageId);
+
+            if (!imageId) {
+                alert(\'Проблема с image_id\');
+                return false;
+            }
+
+            const formData = new FormData();
+            formData.append(\'product_image_id\', imageId);
+
+            fetch(url, {
+                method: \'POST\',
+                body: formData
+            })
+            .then((response) => {
+                response.text()
+                .then((text) => {
+                    if (text.indexOf(\'error\') > -1) {
+                        alert(\'Ошибка при удалении\');
+                    } else {
+                        document.location.reload();
+                    }
+                })
+            });
+
+            return false;
+        }
+    </script>
+    '; ?>
+
+    <?php endif; ?>
     <div class="form-group">
         <label for="price">Цена товара: </label>
         <input class="form-control" type="number" name="price" id="price" required value="<?php echo $this->_tpl_vars['product']['price']; ?>

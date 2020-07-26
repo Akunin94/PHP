@@ -1,23 +1,62 @@
 <?php
 
-$id = Request::getIntFromGet('id');
+$productId = Request::getIntFromGet('id');
 
 $product = [];
 
-if ( $id ) {
-    $product = Product::getById($id);
+if ( $productId ) {
+    $product = Product::getById($productId);
 }
 
 if ( Request::isPost() ) {
-    $product = Product::getDataFromPost();
+    $productData = Product::getDataFromPost();
+    $edited = Product::updateById($productId, $productData);
 
-    $edited = Product::updateById($id, $product);
+	$uploadImages = $_FILES['images'] ?? [];
 
-    if ($edited) {
-        Response::redirect('/products/list');
-    } else {
-        die("some insert error");
-    }
+	$imageNames = $uploadImages['name'];
+	$imageTmpNames = $uploadImages['tmp_name'];
+
+	$path = APP_UPLOAD_PRODUCT_DIR . '/' . $productId;
+
+	if ( !file_exists($path) ) {
+		mkdir($path);
+	}
+
+	for ( $i = 0; $i < count($imageNames); $i++ ) {
+		$imageName = basename($imageNames[$i]);
+		$imageTmpName = $imageTmpNames[$i];
+
+		$filename = $imageName;
+		$counter = 0;
+
+		while (true) {
+			$duplicateImage = ProductImage::findByFilenameInProduct($productId, $filename);
+
+			if (empty($duplicateImage)) {
+				break;
+			}
+
+			$info = pathinfo($imageName);
+			$filename = $info['filename'];
+			$filename .= '_' . $counter . '.' . $info['extension'];
+
+			$counter++;
+		}
+
+		$imagePath = $path . '/' . $imageName;
+
+		move_uploaded_file($imageTmpName, $imagePath);
+		
+		ProductImage::add([
+			'product_id' => $productId,
+			'name' => $filename,
+			'path' => str_replace(APP_PUBLIC_DIR, '', $imagePath)
+		]);
+	}
+
+    
+    Response::redirect('/products/list');
 }
 
 $categories = Category::getList();

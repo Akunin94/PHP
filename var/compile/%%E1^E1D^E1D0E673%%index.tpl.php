@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2020-07-25 06:39:16
+<?php /* Smarty version 2.6.31, created on 2020-07-25 07:54:15
          compiled from products/index.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array('h1' => 'Список товаров')));
@@ -64,15 +64,21 @@ $this->_sections['pagination']['last']       = ($this->_sections['pagination']['
 )</small>
 					<?php echo $this->_tpl_vars['e']['name']; ?>
 
+
 					<?php if (! empty ( $this->_tpl_vars['e']['images'] )): ?>
-					<br />
-					<?php $_from = $this->_tpl_vars['e']['images']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
-    foreach ($_from as $this->_tpl_vars['b']):
-?>
-					<img width="30" src="<?php echo $this->_tpl_vars['b']['path']; ?>
+					<div class="gallery">
+						<?php $_from = $this->_tpl_vars['e']['images']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['k'] => $this->_tpl_vars['b']):
+?>						
+						<a <?php if ($this->_tpl_vars['k'] != 0): ?>class="d-none"<?php endif; ?> href="<?php echo $this->_tpl_vars['b']['path']; ?>
+">
+							<img class="img-thumbnail rounded" width="100" src="<?php echo $this->_tpl_vars['b']['path']; ?>
 " alt="<?php echo $this->_tpl_vars['b']['name']; ?>
 ">
-					<?php endforeach; endif; unset($_from); ?>
+						</a>						
+						<?php endforeach; endif; unset($_from); ?>
+					</div>
+
 					<?php endif; ?>
 
 					<?php if ($this->_tpl_vars['e']['description']): ?>

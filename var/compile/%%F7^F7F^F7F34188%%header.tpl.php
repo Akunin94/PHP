@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2020-07-23 16:21:12
+<?php /* Smarty version 2.6.31, created on 2020-07-26 16:52:57
          compiled from header.tpl */ ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -7,9 +7,21 @@
 	<title>AkuninShop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.7.2/css/lightgallery.min.css">
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.7.2/js/lightgallery-all.min.js"></script>
+	<?php echo '
+	<script>
+	$(document).ready(function() {
+        $(".gallery").each(function(){
+        	$(this).lightGallery(); 
+        });
+    });
+	</script>
+	'; ?>
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-xl static-top navbar-dark bg-primary mb-3">

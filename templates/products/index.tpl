@@ -28,11 +28,16 @@
 				<td>
 					<small class="text-muted">({$e.id})</small>
 					{$e.name}
+
 					{if !empty($e.images)}
-					<br />
-					{foreach from=$e.images item=b}
-					<img width="30" src="{$b.path}" alt="{$b.name}">
-					{/foreach}
+					<div class="gallery">
+						{foreach from=$e.images item=b key=k}						
+						<a {if $k != 0}class="d-none"{/if} href="{$b.path}">
+							<img class="img-thumbnail rounded" width="100" src="{$b.path}" alt="{$b.name}">
+						</a>						
+						{/foreach}
+					</div>
+
 					{/if}
 
 					{if $e.description}
