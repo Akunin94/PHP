@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.31, created on 2020-07-26 15:31:05
+<?php /* Smarty version 2.6.31, created on 2020-07-27 19:57:02
          compiled from products/form.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'default', 'products/form.tpl', 88, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'default', 'products/form.tpl', 92, false),)), $this); ?>
 <div class="mb-4 d-flex justify-content-between">
     <a href="/products/list" class="btn btn-secondary">Назад к списку товаров</a>
 </div>
@@ -18,6 +18,10 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'default', '
         <label for="article">Артикул товара: </label>
         <input class="form-control" type="text" name="article" id="article" required value="<?php echo $this->_tpl_vars['product']['article']; ?>
 ">
+    </div>
+    <div class="form-group">
+        <label for="image_url">Ссылка на изображение: </label>
+        <input class="form-control" type="text" name="image_url" id="image_url">
     </div>
     <div class="form-group">
         <label for="images">Фото товара: </label>

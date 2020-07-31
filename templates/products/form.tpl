@@ -13,6 +13,10 @@
         <input class="form-control" type="text" name="article" id="article" required value="{$product.article}">
     </div>
     <div class="form-group">
+        <label for="image_url">Ссылка на изображение: </label>
+        <input class="form-control" type="text" name="image_url" id="image_url">
+    </div>
+    <div class="form-group">
         <label for="images">Фото товара: </label>
         <input multiple type="file" name="images[]" id="images">
     </div>

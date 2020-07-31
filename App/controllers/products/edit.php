@@ -12,49 +12,15 @@ if ( Request::isPost() ) {
     $productData = Product::getDataFromPost();
     $edited = Product::updateById($productId, $productData);
 
-	$uploadImages = $_FILES['images'] ?? [];
+    /* START ЗАГРУЗКА ПО URL */
+    $imageUrl = trim($_POST['image_url']);
+    ProductImage::uploadImageByUrl($productId, $imageUrl);
+    /* END ЗАГРУЗКА ПО URL */
 
-	$imageNames = $uploadImages['name'];
-	$imageTmpNames = $uploadImages['tmp_name'];
-
-	$path = APP_UPLOAD_PRODUCT_DIR . '/' . $productId;
-
-	if ( !file_exists($path) ) {
-		mkdir($path);
-	}
-
-	for ( $i = 0; $i < count($imageNames); $i++ ) {
-		$imageName = basename($imageNames[$i]);
-		$imageTmpName = $imageTmpNames[$i];
-
-		$filename = $imageName;
-		$counter = 0;
-
-		while (true) {
-			$duplicateImage = ProductImage::findByFilenameInProduct($productId, $filename);
-
-			if (empty($duplicateImage)) {
-				break;
-			}
-
-			$info = pathinfo($imageName);
-			$filename = $info['filename'];
-			$filename .= '_' . $counter . '.' . $info['extension'];
-
-			$counter++;
-		}
-
-		$imagePath = $path . '/' . $imageName;
-
-		move_uploaded_file($imageTmpName, $imagePath);
-		
-		ProductImage::add([
-			'product_id' => $productId,
-			'name' => $filename,
-			'path' => str_replace(APP_PUBLIC_DIR, '', $imagePath)
-		]);
-	}
-
+    /* START ЗАГРУЗКА С ДИСКА*/
+    $uploadImages = $_FILES['images'] ?? [];
+	ProductImage::uploadImages($productId, $uploadImages);
+	/* END ЗАГРУЗКА С ДИСКА*/
     
     Response::redirect('/products/list');
 }

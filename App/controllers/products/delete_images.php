@@ -7,3 +7,4 @@ if ( !$productImageId ) {
 }
 
 $deleted = ProductImage::deleteById($productImageId);
+die('ok');
