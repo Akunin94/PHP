@@ -37,7 +37,6 @@
 						</a>						
 						{/foreach}
 					</div>
-
 					{/if}
 
 					{if $e.description}

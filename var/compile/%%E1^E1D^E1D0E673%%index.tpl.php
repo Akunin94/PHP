@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2020-07-25 07:54:15
+<?php /* Smarty version 2.6.31, created on 2020-08-01 17:09:23
          compiled from products/index.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array('h1' => 'Список товаров')));
@@ -78,7 +78,6 @@ $this->_sections['pagination']['last']       = ($this->_sections['pagination']['
 						</a>						
 						<?php endforeach; endif; unset($_from); ?>
 					</div>
-
 					<?php endif; ?>
 
 					<?php if ($this->_tpl_vars['e']['description']): ?>

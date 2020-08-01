@@ -37,6 +37,9 @@
 	                <li class="nav-item">
 	                    <a class="nav-link {if $smarty.server.PATH_INFO == '/categories/' || $smarty.server.PATH_INFO == '/categories/add' || $smarty.server.PATH_INFO == '/categories/edit' || $smarty.server.PATH_INFO == '/categories/list'} active{/if}" href="/categories/">Категории</a>
 	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link {if $smarty.server.PATH_INFO == '/import/index'}active{/if}" href="/import/index">Импорт товаров</a>
+	                </li>
 	            </ul>
 	        </div>
 	    </div>

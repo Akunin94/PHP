@@ -55,7 +55,7 @@ class Db {
 
 	public static function fetchRow(string $query): array {
 		$result = static::query($query);
-
+		
 	    $row = mysqli_fetch_assoc($result);
 
 	    if ( is_null($row) ) {
@@ -128,5 +128,11 @@ class Db {
 		$connect = static::getConnect();
 
 		return mysqli_insert_id($connect);
+	}
+
+	public static function escape(string $value) {
+		$connect = static::getConnect();
+		
+		return mysqli_real_escape_string($connect, $value);
 	}
 }

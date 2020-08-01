@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2020-07-26 16:52:57
+<?php /* Smarty version 2.6.31, created on 2020-08-01 17:10:20
          compiled from header.tpl */ ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -39,6 +39,9 @@
 	                </li>
 	                <li class="nav-item">
 	                    <a class="nav-link <?php if ($_SERVER['PATH_INFO'] == '/categories/' || $_SERVER['PATH_INFO'] == '/categories/add' || $_SERVER['PATH_INFO'] == '/categories/edit' || $_SERVER['PATH_INFO'] == '/categories/list'): ?> active<?php endif; ?>" href="/categories/">Категории</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link <?php if ($_SERVER['PATH_INFO'] == '/import/index'): ?>active<?php endif; ?>" href="/import/index">Импорт товаров</a>
 	                </li>
 	            </ul>
 	        </div>
