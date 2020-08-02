@@ -14,11 +14,6 @@ class Product {
 
 		foreach ($products as &$product) {
 			$images = ProductImage::getListByProductId($product['id']);
-
-			if (!empty($images)) {
-				$product['images'] = $images;
-			}
-
 			$product['images'] = $images;
 		}
 

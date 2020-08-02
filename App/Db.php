@@ -29,6 +29,10 @@ class Db {
 	    return $connect;
 	}
 
+	public static function expr(string $value) {
+		return new DbExp($value);
+	}
+
 	public static function query($query) {
 		$conn = static::getConnect();
 		$result = mysqli_query($conn, $query);
@@ -89,7 +93,12 @@ class Db {
 		$set_fields = [];
 
 		foreach ($fields as $field_name => $field_value) {
-			$set_fields[] = "`$field_name` = '$field_value'";
+			if ( $field_value instanceof DbExp ) {
+				$set_fields[] = "`$field_name` = $field_value";
+			} else {
+				$field_value = Db::escape($field_value);
+				$set_fields[] = "`$field_name` = '$field_value'";
+			}
 		}
 
 		$set_fields = implode(',', $set_fields);
@@ -97,7 +106,7 @@ class Db {
 		$query = "UPDATE $table_name SET $set_fields";
 
 		if ( $where ) {
-			$query .= " WHERE " . $where;
+			$query .= (' WHERE ' . $where);
 		}
 
 		static::query($query);
@@ -111,7 +120,13 @@ class Db {
 
 		foreach ($fields as $field_name => $field_value) {
 			$field_names[] = "`$field_name`";
-			$field_values[] = "'$field_value'";
+
+			if ( $field_value instanceof DbExp ) {
+				$field_values[] = "$field_value";
+			} else {
+				$field_value = Db::escape($field_value);
+				$field_values[] = "'$field_value'";
+			}
 		}
 
 		$field_names = implode(',', $field_names);

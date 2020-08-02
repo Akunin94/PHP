@@ -141,7 +141,7 @@ class ProductImage {
 
     	file_put_contents($imagePath, fopen($imageUrl, 'r'));
     	
-    	ProductImage::updateById($productImageId, [
+    	static::updateById($productImageId, [
     		'name' => $filename,
     		'path' => str_replace(APP_PUBLIC_DIR, '', $imagePath)
     	]);
@@ -233,7 +233,7 @@ class ProductImage {
 		$filename = static::getUniqueUploadImageName($productId, $imageName);
 
 		$path = static::getUploadDirForProduct($productId);
-		$imagePath = $path . '/' . $imageName;
+		$imagePath = $path . '/' . $filename;
 
 		move_uploaded_file($imageTmpName, $imagePath);
 		
