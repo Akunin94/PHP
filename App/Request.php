@@ -1,5 +1,7 @@
 <?php 
 
+namespace App;
+
 class Request {
 	public static function getIntFromGet(string $key, $default = 0) {
 		if ( isset($_GET[$key]) ) {

@@ -61,7 +61,8 @@ $RECYCLE.BIN/
 *.lnk
 
 # Скрываем папки Smarty
-var
-public/upload
+/var/
+/public/upload/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,sublimetext
+/vendor/

@@ -1,12 +1,16 @@
 <?php
 
-$id = Request::getIntFromPost('id', false);
+use App\Category;
+use App\Request;
+use App\Response;
 
-if ( !$id ) {
+$category_id = Request::getIntFromPost('id', false);
+
+if ( !$category_id ) {
     die('Error with id');
 }
 
-$deleted = Category::deleteById($id);
+$deleted = Category::deleteById($category_id);
 
 if ($deleted) {
     Response::redirect('/categories/list');

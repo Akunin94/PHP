@@ -14,7 +14,7 @@
 				<td>{$e.id}</td>
 				<td>{$e.name}</td>
 				<td>
-					<span class="badge badge-dark pb-2" style="font-size: inherit;">{$e.status}</span>
+					<span class="badge badge-{if $e.status=="new"}primary{elseif $e.status=="in_process"}warning{elseif $e.status=="done"}success{elseif $e.status=="error"}danger{/if} pb-2" style="font-size: inherit;">{$e.status}</span>
 				</td>
 				<td class="text-right">
 					<a class="btn mb-1 btn-primary" href="/queue/run?id={$e.id}">Запустить</a>

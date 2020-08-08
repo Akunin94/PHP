@@ -1,5 +1,11 @@
 <?php
 
+use App\Request;
+use App\Response;
+use App\Product;
+use App\ProductImage;
+use App\Category;
+
 $productId = Request::getIntFromGet('id');
 
 $product = [];

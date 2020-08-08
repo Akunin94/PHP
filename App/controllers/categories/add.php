@@ -1,5 +1,9 @@
 <?php
 
+use App\Category;
+use App\Request;
+use App\Response;
+
 if ( Request::isPost() ) {
     $category = Category::getFromPost();
     $inserted = Category::add($category);
