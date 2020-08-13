@@ -52,12 +52,16 @@ class Db {
 		$result = static::query($query);
 
 		$data = [];
-		while ( $row = mysqli_fetch_assoc($result) ) {
+		while ( $row = static::fetchAssoc($result) ) {
 		    $data[] = $row;
 		}
 
 		return $data;
 	}
+
+	public static function fetchAssoc($result): ?array {
+        return mysqli_fetch_assoc($result);
+    }
 
 	public static function fetchRow(string $query): array {
 		$result = static::query($query);

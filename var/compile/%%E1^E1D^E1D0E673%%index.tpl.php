@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2020-08-01 17:09:23
+<?php /* Smarty version 2.6.31, created on 2020-08-13 18:19:53
          compiled from products/index.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array('h1' => 'Список товаров')));
@@ -60,43 +60,28 @@ $this->_sections['pagination']['last']       = ($this->_sections['pagination']['
 ?>
 			<tr>
 				<td>
-					<small class="text-muted">(<?php echo $this->_tpl_vars['e']['id']; ?>
+					<small class="text-muted">(<?php echo $this->_tpl_vars['e']->getId(); ?>
 )</small>
-					<?php echo $this->_tpl_vars['e']['name']; ?>
+					<?php echo $this->_tpl_vars['e']->getName(); ?>
 
 
-					<?php if (! empty ( $this->_tpl_vars['e']['images'] )): ?>
-					<div class="gallery">
-						<?php $_from = $this->_tpl_vars['e']['images']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
-    foreach ($_from as $this->_tpl_vars['k'] => $this->_tpl_vars['b']):
-?>						
-						<a <?php if ($this->_tpl_vars['k'] != 0): ?>class="d-none"<?php endif; ?> href="<?php echo $this->_tpl_vars['b']['path']; ?>
-">
-							<img class="img-thumbnail rounded" width="100" src="<?php echo $this->_tpl_vars['b']['path']; ?>
-" alt="<?php echo $this->_tpl_vars['b']['name']; ?>
-">
-						</a>						
-						<?php endforeach; endif; unset($_from); ?>
-					</div>
-					<?php endif; ?>
-
-					<?php if ($this->_tpl_vars['e']['description']): ?>
-					<small class="text-muted mt-1 d-block"><?php echo $this->_tpl_vars['e']['description']; ?>
+					
+					<?php if ($this->_tpl_vars['e']->getDescription): ?>
+					<small class="text-muted mt-1 d-block"><?php echo $this->_tpl_vars['e']->getDescription; ?>
 </small>
 					<?php endif; ?>
 				</td>
-				<td><?php echo $this->_tpl_vars['e']['article']; ?>
+				<td><?php echo $this->_tpl_vars['e']->getArticle(); ?>
 </td>
-				<td class="text-nowrap"><?php echo $this->_tpl_vars['e']['price']; ?>
+				<td class="text-nowrap"><?php echo $this->_tpl_vars['e']->getPrice(); ?>
  <strong>₽</strong></td>
-				<td><?php echo $this->_tpl_vars['e']['amount']; ?>
+				<td><?php echo $this->_tpl_vars['e']->getAmount(); ?>
 </td>
-				<td><?php echo $this->_tpl_vars['e']['category_name']; ?>
-</td>
+								<td></td>
 				<td class="text-center">
-					<a class="btn mb-1 btn-primary" href="/products/edit?id=<?php echo $this->_tpl_vars['e']['id']; ?>
+					<a class="btn mb-1 btn-primary" href="/products/edit?id=<?php echo $this->_tpl_vars['e']->getId(); ?>
 ">Редактировать</a>
-					<form action="/products/delete" method="post" class="d-inline"><input type="hidden" name="id" value="<?php echo $this->_tpl_vars['e']['id']; ?>
+					<form action="/products/delete" method="post" class="d-inline"><input type="hidden" name="id" value="<?php echo $this->_tpl_vars['e']->getId(); ?>
 "><button type="submit" class="btn mb-1 btn-secondary">Удалить</form>
 				</td>
 			</tr>

@@ -26,10 +26,10 @@
 			{foreach from=$products item=e}
 			<tr>
 				<td>
-					<small class="text-muted">({$e.id})</small>
-					{$e.name}
+					<small class="text-muted">({$e->getId()})</small>
+					{$e->getName()}
 
-					{if !empty($e.images)}
+					{*if !empty($e.images)}
 					<div class="gallery">
 						{foreach from=$e.images item=b key=k}						
 						<a {if $k != 0}class="d-none"{/if} href="{$b.path}">
@@ -37,19 +37,20 @@
 						</a>						
 						{/foreach}
 					</div>
-					{/if}
+					{/if*}
 
-					{if $e.description}
-					<small class="text-muted mt-1 d-block">{$e.description}</small>
+					{if $e->getDescription}
+					<small class="text-muted mt-1 d-block">{$e->getDescription}</small>
 					{/if}
 				</td>
-				<td>{$e.article}</td>
-				<td class="text-nowrap">{$e.price} <strong>₽</strong></td>
-				<td>{$e.amount}</td>
-				<td>{$e.category_name}</td>
+				<td>{$e->getArticle()}</td>
+				<td class="text-nowrap">{$e->getPrice()} <strong>₽</strong></td>
+				<td>{$e->getAmount()}</td>
+				{*assign var=productCategory value=$e->getCategory()*}
+				<td>{*$productCategory->getName()*}</td>
 				<td class="text-center">
-					<a class="btn mb-1 btn-primary" href="/products/edit?id={$e.id}">Редактировать</a>
-					<form action="/products/delete" method="post" class="d-inline"><input type="hidden" name="id" value="{$e.id}"><button type="submit" class="btn mb-1 btn-secondary">Удалить</form>
+					<a class="btn mb-1 btn-primary" href="/products/edit?id={$e->getId()}">Редактировать</a>
+					<form action="/products/delete" method="post" class="d-inline"><input type="hidden" name="id" value="{$e->getId()}"><button type="submit" class="btn mb-1 btn-secondary">Удалить</form>
 				</td>
 			</tr>
 			{/foreach}
