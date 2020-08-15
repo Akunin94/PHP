@@ -46,8 +46,8 @@
 				<td>{$e->getArticle()}</td>
 				<td class="text-nowrap">{$e->getPrice()} <strong>₽</strong></td>
 				<td>{$e->getAmount()}</td>
-				{*assign var=productCategory value=$e->getCategory()*}
-				<td>{*$productCategory->getName()*}</td>
+				{assign var=productCategory value=$e->getCategory()}
+				<td>{$productCategory->getName()}</td>
 				<td class="text-center">
 					<a class="btn mb-1 btn-primary" href="/products/edit?id={$e->getId()}">Редактировать</a>
 					<form action="/products/delete" method="post" class="d-inline"><input type="hidden" name="id" value="{$e->getId()}"><button type="submit" class="btn mb-1 btn-secondary">Удалить</form>

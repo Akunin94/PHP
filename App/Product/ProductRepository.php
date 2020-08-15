@@ -13,6 +13,38 @@ use App\ProductImage;
  */
 
 class ProductRepository {
+    public function getProductFromArray(array $data): Product {
+        $id = $data['id'];
+
+        $name = $data['name'] ?? null;
+        $price = $data['price'] ?? null;
+        $amount = $data['amount'] ?? null;
+
+        if (is_null($name) || is_null($price) ||is_null($amount)) {
+            throw new \Exception('Не переданы одно из полей name, price, amount');
+        }
+
+        $article = $data['article'] ?? '';
+        $description = $data['description'] ?? '';
+        $categoryId = $data['category_id'] ?? 0;
+
+        $product = new Product($name, $price, $amount);
+
+        if ($categoryId > 0) {
+            $categoryName = $data['category_name'] ?? '';
+            $category = new Category\Category($categoryName);
+            $category->setId($categoryId);
+
+            $product->setCategory($category);
+        }
+        $product
+            ->setId($id)
+            ->setDescription($description)
+            ->setArticle($article);
+//                ->setCategoryId($categoryId);
+
+        return $product;
+    }
     public function getList(int $limit = 50, $offset = 0) {
         $query = "SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id LIMIT $offset, $limit";
 
@@ -20,30 +52,7 @@ class ProductRepository {
 
         $products = [];
         while ($productArray = Db::fetchAssoc($result)) {
-            $id = $productArray['id'];
-
-            $name = $productArray['name'];
-            $price = $productArray['price'];
-            $amount = $productArray['amount'];
-
-            $article = $productArray['article'] ?? '';
-            $description = $productArray['description'] ?? '';
-            $categoryId = $productArray['category_id'] ?? 0;
-
-            $product = new Product($name, $price, $amount);
-
-            if ($categoryId > 0) {
-                $categoryName = $productArray['category_name'] ?? '';
-                $category = new Category($categoryName);
-                $category->setId($categoryId);
-
-                $product->setCategory($category);
-            }
-            $product
-                ->setId($id)
-                ->setDescription($description)
-                ->setArticle($article);
-//                ->setCategory($categoryId);
+            $product = $this->getProductFromArray($productArray);
 
             $products[] = $product;
         }

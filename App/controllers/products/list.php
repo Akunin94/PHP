@@ -5,7 +5,7 @@ use App\Product;
 
 $current_page = Request::getIntFromGet('p', 1);
 
-$limit = 8;
+$limit = 4;
 $offset = (int) (($current_page - 1) * $limit);
 
 $products_count = Product::getListCount();

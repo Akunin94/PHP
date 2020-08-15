@@ -8,7 +8,7 @@ class Product {
     /**
      * @var int
      */
-	protected $id;
+	protected $id = 0;
 
     /**
      * @var string
@@ -18,7 +18,7 @@ class Product {
     /**
      * @var string
      */
-	protected $article;
+	protected $article = '';
 
     /**
      * @var float
@@ -33,7 +33,7 @@ class Product {
     /**
      * @var string
      */
-	protected $description;
+	protected $description = '';
 
     /**
      * @var Category
@@ -43,7 +43,7 @@ class Product {
     /**
      * @var array
      */
-	protected $images;
+	protected $images = [];
 
 	public function getId() {
 		return $this->id;

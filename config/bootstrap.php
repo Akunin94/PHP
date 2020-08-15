@@ -2,7 +2,7 @@
 
 use App\Category;
 
-require_once 'config.php';
+require_once __DIR__ . '/config.php';
 
 $path_info = $_SERVER['PATH_INFO'];
 
