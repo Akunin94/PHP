@@ -29,15 +29,15 @@
 					<small class="text-muted">({$e->getId()})</small>
 					{$e->getName()}
 
-					{*if !empty($e.images)}
+					{if $e->getImages()}
 					<div class="gallery">
-						{foreach from=$e.images item=b key=k}						
-						<a {if $k != 0}class="d-none"{/if} href="{$b.path}">
-							<img class="img-thumbnail rounded" width="100" src="{$b.path}" alt="{$b.name}">
+						{foreach from=$e->getImages() item=b key=k}
+						<a {if $k != 0}class="d-none"{/if} href="{$b->getPath()}">
+							<img class="img-thumbnail rounded" width="100" src="{$b->getPath()}" alt="{$b->getName()}">
 						</a>						
 						{/foreach}
 					</div>
-					{/if*}
+					{/if}
 
 					{if $e->getDescription}
 					<small class="text-muted mt-1 d-block">{$e->getDescription}</small>

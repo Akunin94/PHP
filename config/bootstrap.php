@@ -8,8 +8,8 @@ $path_info = $_SERVER['PATH_INFO'];
 
 $is_index = substr($path_info, -1) == '/';
 
-if ( $is_index ) {
-	$path_info .= 'list';
+if ($is_index) {
+    $path_info .= 'list';
 }
 
 
@@ -18,8 +18,13 @@ $smarty->assign('categories_shared', $categories);
 
 $controller_path = $_SERVER['DOCUMENT_ROOT'] . '/../App/Controllers' . $path_info . '.php';
 
-if ( file_exists($controller_path) ) {
-	require_once $controller_path;
+if (file_exists($controller_path)) {
+    try {
+        require_once $controller_path;
+    } catch (\Throwable $e) {
+        dump('no $controller_path', true);
+    }
+
 } else {
-	$smarty->display('404.tpl');
+    $smarty->display('404.tpl');
 }

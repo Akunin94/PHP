@@ -4,7 +4,7 @@
 namespace App\Category;
 
 
-class Category {
+class CategoryModel {
     /**
      * @var int
      */
@@ -29,9 +29,9 @@ class Category {
 
     /**
      * @param int $id
-     * @return Category
+     * @return CategoryModel
      */
-    public function setId(int $id): Category
+    public function setId(int $id): CategoryModel
     {
         $this->id = $id;
         return $this;
@@ -47,9 +47,9 @@ class Category {
 
     /**
      * @param string $name
-     * @return Category
+     * @return CategoryModel
      */
-    public function setName(string $name): Category
+    public function setName(string $name): CategoryModel
     {
         $this->name = $name;
         return $this;

@@ -2,9 +2,9 @@
 
 namespace App\Product;
 
-use App\Category\Category;
+use App\Category\CategoryModel;
 
-class Product {
+class ProductModel {
     /**
      * @var int
      */
@@ -36,12 +36,12 @@ class Product {
 	protected $description = '';
 
     /**
-     * @var Category
+     * @var CategoryModel
      */
 	protected $category;
 
     /**
-     * @var array
+     * @var ProductImageModel[]
      */
 	protected $images = [];
 
@@ -65,9 +65,9 @@ class Product {
 
     /**
      * @param string $name
-     * @return Product
+     * @return ProductModel
      */
-    public function setName(string $name): Product
+    public function setName(string $name): ProductModel
     {
         $this->name = $name;
         return $this;
@@ -83,9 +83,9 @@ class Product {
 
     /**
      * @param string $article
-     * @return Product
+     * @return ProductModel
      */
-    public function setArticle(string $article): Product
+    public function setArticle(string $article): ProductModel
     {
         $this->article = $article;
         return $this;
@@ -101,9 +101,9 @@ class Product {
 
     /**
      * @param float $price
-     * @return Product
+     * @return ProductModel
      */
-    public function setPrice(float $price): Product
+    public function setPrice(float $price): ProductModel
     {
         $this->price = $price;
         return $this;
@@ -119,9 +119,9 @@ class Product {
 
     /**
      * @param int $amount
-     * @return Product
+     * @return ProductModel
      */
-    public function setAmount(int $amount): Product
+    public function setAmount(int $amount): ProductModel
     {
         $this->amount = $amount;
         return $this;
@@ -137,34 +137,34 @@ class Product {
 
     /**
      * @param string $description
-     * @return Product
+     * @return ProductModel
      */
-    public function setDescription(string $description): Product
+    public function setDescription(string $description): ProductModel
     {
         $this->description = $description;
         return $this;
     }
 
     /**
-     * @return Category|null
+     * @return CategoryModel|null
      */
-    public function getCategory(): ?Category
+    public function getCategory(): ?CategoryModel
     {
         return $this->category;
     }
 
     /**
-     * @param Category $category
-     * @return Product
+     * @param CategoryModel $category
+     * @return ProductModel
      */
-    public function setCategory(Category $category): Product
+    public function setCategory(CategoryModel $category): ProductModel
     {
         $this->category = $category;
         return $this;
     }
 
     /**
-     * @return array
+     * @return ProductImageModel[]
      */
     public function getImages(): array
     {
@@ -172,10 +172,10 @@ class Product {
     }
 
     /**
-     * @param array $images
-     * @return Product
+     * @param ProductImageModel[] $images
+     * @return ProductModel
      */
-    public function setImages(array $images): Product
+    public function setImages(array $images): ProductModel
     {
         $this->images = $images;
         return $this;
@@ -186,4 +186,10 @@ class Product {
 
 		return $this;
 	}
+
+	public function addImage(ProductImageModel $productImage): ProductModel {
+        $this->images[] = $productImage;
+
+        return $this;
+    }
 }
