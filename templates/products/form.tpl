@@ -1,5 +1,5 @@
 <div class="mb-4 d-flex justify-content-between">
-    <a href="/products/list" class="btn btn-secondary">Назад к списку товаров</a>
+    <a href="/products/" class="btn btn-secondary">Назад к списку товаров</a>
 </div>
 <form method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="{$product->getId()}">

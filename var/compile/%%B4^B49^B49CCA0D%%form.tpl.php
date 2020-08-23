@@ -1,9 +1,9 @@
-<?php /* Smarty version 2.6.31, created on 2020-08-18 16:37:30
+<?php /* Smarty version 2.6.31, created on 2020-08-23 18:51:04
          compiled from products/form.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'default', 'products/form.tpl', 93, false),)), $this); ?>
 <div class="mb-4 d-flex justify-content-between">
-    <a href="/products/list" class="btn btn-secondary">Назад к списку товаров</a>
+    <a href="/products/" class="btn btn-secondary">Назад к списку товаров</a>
 </div>
 <form method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?php echo $this->_tpl_vars['product']->getId(); ?>
