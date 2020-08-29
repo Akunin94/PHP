@@ -4,16 +4,25 @@
 namespace App\Product;
 
 
+use App\Category;
 use App\Product;
-use App\Product\ProductRepository;
+use App\ProductImage;
 use App\Renderer;
 use App\Request;
 use App\Response;
-use App\ProductImage;
-use App\Category;
 
 class ProductController
 {
+    /**
+     * @var array
+     */
+    private $params;
+
+    public function __construct(array $params)
+    {
+        $this->params = $params;
+    }
+
     public function list()
     {
         $current_page = Request::getIntFromGet('p', 1);
@@ -37,7 +46,10 @@ class ProductController
 
     public function edit()
     {
-        $productId = Request::getIntFromGet('id');
+        $productId = Request::getIntFromGet('id', null);
+        if (is_null($productId)) {
+            $productId = $this->params['id'] ?? null;
+        }
 
         $product = [];
 
@@ -128,5 +140,40 @@ class ProductController
         $smarty->assign('categories', $categories);
         $smarty->assign('product', $product);
         $smarty->display('products/add.tpl');
+    }
+
+    public function delete()
+    {
+        $id = Request::getIntFromPost('id', false);
+
+        if (!$id) {
+            die('Error with id');
+        }
+
+        $deleted = Product::deleteById($id);
+
+        if ($deleted) {
+            Response::redirect('/products/list');
+        } else {
+            die("some error with delete row");
+        }
+    }
+
+    public function deleteImage()
+    {
+        $productImageId = Request::getIntFromPost('product_image_id', false);
+
+        if ( !$productImageId ) {
+            die('Error with id');
+        }
+
+        $deleted = ProductImage::deleteById($productImageId);
+        die('ok');
+
+//        if ($deleted) {
+//            Response::redirect('/products/list');
+//        } else {
+//            die('some error with delete row');
+//        }
     }
 }
