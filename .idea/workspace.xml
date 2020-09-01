@@ -20,28 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eeca800d-4e87-416c-a2dd-cb9c2c733711" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/App/Category/CategoryController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Import/ImportController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Queue/QueueController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Router/Exception/MethodDoesNotExistException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Router/Exception/NotFoundException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Router/Route.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Category/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Category/CategoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Product/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Product/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Request.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Router/Dispatcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Router/Dispatcher.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/categories/add.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/categories/delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/categories/delete_category_products.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/categories/edit.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/categories/list.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/categories/view.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/import/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/import/upload.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/products/add.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/products/delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/products/delete_images.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/products/edit.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/products/list.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/queue/list.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/controllers/queue/run.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bootstrap.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +66,7 @@
     <property name="com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/App/Product" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -106,7 +93,10 @@
       <workItem from="1598118988059" duration="1930000" />
       <workItem from="1598200336305" duration="6947000" />
       <workItem from="1598467290225" duration="1955000" />
-      <workItem from="1598711175933" duration="4352000" />
+      <workItem from="1598711175933" duration="4654000" />
+      <workItem from="1598894953282" duration="143000" />
+      <workItem from="1598895265491" duration="4584000" />
+      <workItem from="1598978430556" duration="4535000" />
     </task>
     <servers />
   </component>
@@ -126,22 +116,22 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="753" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1597562922236">
+    <state x="753" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1598979582602">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="753" y="229" key="#com.intellij.ide.util.MemberChooser/1920.174.1440.860/0.0.1920.1040@0.0.1920.1040" timestamp="1597562922236" />
+    <state x="753" y="229" key="#com.intellij.ide.util.MemberChooser/1920.174.1440.860/0.0.1920.1040@0.0.1920.1040" timestamp="1598979582602" />
     <state x="994" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1597775100110">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="994" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.174.1440.860/0.0.1920.1040@0.0.1920.1040" timestamp="1597775100110" />
-    <state x="1101" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1598468371039">
+    <state x="1101" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1598980057089">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1101" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.174.1440.860/0.0.1920.1040@0.0.1920.1040" timestamp="1598468371039" />
-    <state x="1178" y="246" key="NewPhpClassDialog" timestamp="1598468841323">
+    <state x="1101" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1920.174.1440.860/0.0.1920.1040@0.0.1920.1040" timestamp="1598980057089" />
+    <state x="1178" y="246" key="NewPhpClassDialog" timestamp="1598979238761">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1178" y="246" key="NewPhpClassDialog/1920.174.1440.860/0.0.1920.1040@0.0.1920.1040" timestamp="1598468841323" />
+    <state x="1178" y="246" key="NewPhpClassDialog/1920.174.1440.860/0.0.1920.1040@0.0.1920.1040" timestamp="1598979238761" />
     <state x="1134" y="447" key="NewPhpFileDialog" timestamp="1598468302125">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

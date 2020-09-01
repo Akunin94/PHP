@@ -9,17 +9,18 @@ use App\Product;
 use App\Renderer;
 use App\Request;
 use App\Response;
+use App\Router\Route;
 
 class CategoryController
 {
     /**
-     * @var array
+     * @var Route
      */
-    private $params;
+    private $route;
 
-    public function __construct(array $params)
+    public function __construct(Route $route)
     {
-        $this->params = $params;
+        $this->route = $route;
     }
 
     public function add()
@@ -58,7 +59,10 @@ class CategoryController
 
     public function edit()
     {
-        $id = Request::getIntFromGet('id');
+        $id = Request::getIntFromGet('id', null);
+        if (is_null($id)) {
+            $id = $this->params['id'] ?? null;
+        }
 
         $category = [];
 

@@ -9,6 +9,9 @@ use App\Import\ImportController;
 use App\Product\ProductController;
 use App\Queue\QueueController;
 use App\Renderer;
+use App\Request;
+use App\Router\Exception\MethodDoesNotExistException;
+use App\Router\Exception\NotFoundException;
 
 class Dispatcher
 {
@@ -23,6 +26,7 @@ class Dispatcher
         '/categories/' => [CategoryController::class, 'list'],
         '/categories/add' => [CategoryController::class, 'add'],
         '/categories/edit' => [CategoryController::class, 'edit'],
+        '/categories/edit/{$id}' => [CategoryController::class, 'edit'],
         '/categories/delete' => [CategoryController::class, 'delete'],
         '/categories/view' => [CategoryController::class, 'view'],
 
@@ -38,72 +42,38 @@ class Dispatcher
 
     public function dispatch()
     {
-        $url = $_SERVER['PATH_INFO'];
-
-        $route = null;
+        $url = Request::getUrl();
+        $route = new Route($url);
 
         foreach ($this->routes as $path => $controller) {
-            $isSmartPath = strpos($path, '{');
-            if ($url == $path) {
-                $route = $controller;
+            if ($this->isValidPath($path, $route))
                 break;
-            } else if ($isSmartPath) {
-                $isEqual = false;
-
-                $urlChunks = explode('/', $url);
-                $pathChunks = explode('/', $path);
-
-                if (count($urlChunks) != count($pathChunks)) {
-                    break;
-                }
-
-                $controllerParams = [];
-
-                for ($i = 0; $i < count($pathChunks); $i++) {
-                    $urlChunk = $urlChunks[$i];
-                    $pathChunk = $pathChunks[$i];
-
-                    $isSmartChunk = strpos($pathChunk, '{') !== false && strpos($pathChunk, '}') !== false;
-
-                    if ($urlChunk === $pathChunk) {
-                        $isEqual = true;
-                    } else if ($isSmartChunk) {
-                        $paramName = str_replace(['{', '}'], '', $pathChunk);
-                        $controllerParams[$paramName] = $urlChunk;
-                        $isEqual = true;
-                    } else {
-                        $controllerParams = [];
-                        $isEqual = false;
-                    }
-                }
-
-                if (!$isEqual) {
-                    continue;
-                }
-
-                if ($isEqual === true) {
-                    $route = $controller;
-                    break;
-                }
-            }
         }
 
-        $smarty = Renderer::getSmarty();
-
-        if (is_null($route)) {
-            $smarty->display('404.tpl');
-            exit;
+        try {
+            $route->execute();
+        } catch (NotFoundException | MethodDoesNotExistException $e) {
+            $this->error404();
         }
+    }
 
-        $class = $route[0];
-        $method = $route[1];
+    public function isValidPath(string $path, Route $route)
+    {
+        $controller = $this->routes[$path];
 
-        $controller = new $class($controllerParams);
-        if (method_exists($controller, $method)) {
-            $controller->{$method}();
-        } else {
-            $smarty->display('404.tpl');
-            exit;
-        }
+        $isValidPath = $route->isValidPath($path);
+
+        if ($isValidPath) {
+            $route->setController($controller[0]);
+            $route->setMethod($controller[1]);
+        };
+
+        return $isValidPath;
+    }
+
+    private function error404()
+    {
+        Renderer::getSmarty()->display('404.tpl');
+        exit;
     }
 }
